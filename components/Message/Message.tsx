@@ -10,8 +10,16 @@ const Message = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
-  text: {},
+  container: {
+    backgroundColor: "#3777f0",
+    padding: 10,
+    margin: 10,
+    borderRadius: 10,
+    width: "75%",
+  },
+  text: {
+    color: "#fff",
+  },
 });
 
 export default Message;
