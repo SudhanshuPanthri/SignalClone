@@ -1,6 +1,11 @@
 import React from "react";
 import { View, Text, StyleSheet, TextInput } from "react-native";
-import { SimpleLineIcons } from "@expo/vector-icons";
+import {
+  SimpleLineIcons,
+  Feather,
+  MaterialCommunityIcons,
+  AntDesign,
+} from "@expo/vector-icons";
 
 const MessageInput = () => {
   return (
@@ -9,13 +14,20 @@ const MessageInput = () => {
         <SimpleLineIcons
           name={"emotsmile"}
           size={24}
-          color="grey"
+          color="#595959"
           style={styles.icon}
         />
         <TextInput style={styles.input} />
+        <Feather name="camera" size={24} color="#595959" style={styles.icon} />
+        <MaterialCommunityIcons
+          name="microphone-outline"
+          size={24}
+          color="#595959"
+          style={styles.icon}
+        />
       </View>
       <View style={styles.buttonContainer}>
-        <Text style={styles.button}>+</Text>
+        <AntDesign name="plus" size={24} color="white" style={styles.icon} />
       </View>
     </View>
   );
@@ -33,7 +45,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#dedede",
     borderRadius: 25,
-    padding: 10,
+    padding: 5,
     alignItems: "center",
     flexDirection: "row",
   },
@@ -42,8 +54,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
   },
   buttonContainer: {
-    width: 50,
-    height: 50,
+    width: 40,
+    height: 40,
     backgroundColor: "#3777f0",
     borderRadius: 50,
     justifyContent: "center",
