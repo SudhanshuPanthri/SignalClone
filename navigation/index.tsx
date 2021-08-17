@@ -6,6 +6,7 @@ import {
 import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
 import { ColorSchemeName, Image, Text, View } from "react-native";
+import { Feather } from "@expo/vector-icons";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import { RootStackParamList } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -69,7 +70,29 @@ const HomeHeader = (props) => {
           borderRadius: 30,
         }}
       />
-      <Text>Home</Text>
+      <Text
+        style={{
+          fontSize: 18,
+          fontWeight: "bold",
+        }}
+      >
+        Signal
+      </Text>
+      <View
+        style={{
+          flexDirection: "row",
+        }}
+      >
+        <Feather name="camera" size={20} color="black" />
+        <Feather
+          name="edit-2"
+          size={20}
+          color="black"
+          style={{
+            marginLeft: 20,
+          }}
+        />
+      </View>
     </View>
   );
 };
