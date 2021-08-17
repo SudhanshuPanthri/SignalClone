@@ -5,13 +5,12 @@ import {
 } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
-import { ColorSchemeName } from "react-native";
-
+import { ColorSchemeName, Image, Text, View } from "react-native";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import { RootStackParamList } from "../types";
-import BottomTabNavigator from "./BottomTabNavigator";
 import LinkingConfiguration from "./LinkingConfiguration";
 import ChatRoomScreen from "../screens/ChatRoomScreen";
+import HomeScreen from "../screens/TabOneScreen";
 export default function Navigation({
   colorScheme,
 }: {
@@ -27,19 +26,21 @@ export default function Navigation({
   );
 }
 
-// A root stack navigator is often used for displaying modals on top of all other content
-// Read more here: https://reactnavigation.org/docs/modal
 const Stack = createStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{ headerTitle: HomeHeader }}
+      />
       <Stack.Screen
         name="ChatRoom"
         component={ChatRoomScreen}
         options={{ headerShown: true }}
       />
-      <Stack.Screen name="Root" component={BottomTabNavigator} />
       <Stack.Screen
         name="NotFound"
         component={NotFoundScreen}
@@ -48,3 +49,27 @@ function RootNavigator() {
     </Stack.Navigator>
   );
 }
+
+const HomeHeader = (props) => {
+  return (
+    <View
+      style={{
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+      }}
+    >
+      <Image
+        source={{
+          uri: "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/1.jpg",
+        }}
+        style={{
+          width: 30,
+          height: 30,
+          borderRadius: 30,
+        }}
+      />
+      <Text>Home</Text>
+    </View>
+  );
+};

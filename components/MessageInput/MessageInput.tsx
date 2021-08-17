@@ -1,15 +1,48 @@
-import React from "react";
-import { View, Text, StyleSheet, TextInput } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  Pressable,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import {
   SimpleLineIcons,
   Feather,
   MaterialCommunityIcons,
   AntDesign,
+  Ionicons,
 } from "@expo/vector-icons";
 
 const MessageInput = () => {
+  const [message, setMessage] = useState("");
+  // console.warn(message);
+
+  const sendMessage = () => {
+    console.warn("Sending message : ");
+    setMessage("");
+  };
+
+  const onPlusClicked = () => {
+    console.warn("onplus clicked");
+  };
+
+  const onPress = () => {
+    if (message) {
+      sendMessage();
+    } else {
+      onPlusClicked();
+    }
+  };
+
   return (
-    <View style={styles.rootContainer}>
+    <KeyboardAvoidingView
+      style={styles.rootContainer}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={100}
+    >
       <View style={styles.inputContainer}>
         <SimpleLineIcons
           name={"emotsmile"}
@@ -17,7 +50,12 @@ const MessageInput = () => {
           color="#595959"
           style={styles.icon}
         />
-        <TextInput style={styles.input} />
+        <TextInput
+          style={styles.input}
+          value={message}
+          onChangeText={(newMessage) => setMessage(newMessage)}
+          placeholder="Message...."
+        />
         <Feather name="camera" size={24} color="#595959" style={styles.icon} />
         <MaterialCommunityIcons
           name="microphone-outline"
@@ -26,10 +64,14 @@ const MessageInput = () => {
           style={styles.icon}
         />
       </View>
-      <View style={styles.buttonContainer}>
-        <AntDesign name="plus" size={24} color="white" style={styles.icon} />
-      </View>
-    </View>
+      <Pressable onPress={onPress} style={styles.buttonContainer}>
+        {message ? (
+          <Ionicons name="send" size={18} color="white" />
+        ) : (
+          <AntDesign name="plus" size={24} color="white" style={styles.icon} />
+        )}
+      </Pressable>
+    </KeyboardAvoidingView>
   );
 };
 
