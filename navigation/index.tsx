@@ -5,7 +5,7 @@ import {
 } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
-import { ColorSchemeName, Image, Text, View } from "react-native";
+import { ColorSchemeName, Image, Text, View, Dimensions } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import { RootStackParamList } from "../types";
@@ -28,7 +28,7 @@ export default function Navigation({
 }
 
 const Stack = createStackNavigator<RootStackParamList>();
-
+const phoneWidth = Dimensions.get("window").width;
 function RootNavigator() {
   return (
     <Stack.Navigator>
@@ -40,7 +40,7 @@ function RootNavigator() {
       <Stack.Screen
         name="ChatRoom"
         component={ChatRoomScreen}
-        options={{ headerShown: true }}
+        options={{ headerTitle: ChatRoomHeader, headerBackTitleVisible: false }}
       />
       <Stack.Screen
         name="NotFound"
@@ -55,6 +55,7 @@ const HomeHeader = (props) => {
   return (
     <View
       style={{
+        width: phoneWidth,
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
@@ -68,12 +69,14 @@ const HomeHeader = (props) => {
           width: 30,
           height: 30,
           borderRadius: 30,
+          marginLeft: 10,
         }}
       />
       <Text
         style={{
           fontSize: 18,
           fontWeight: "bold",
+          marginLeft: 20,
         }}
       >
         Signal
@@ -83,13 +86,80 @@ const HomeHeader = (props) => {
           flexDirection: "row",
         }}
       >
-        <Feather name="camera" size={20} color="black" />
+        <Feather
+          name="camera"
+          size={20}
+          color="black"
+          style={{
+            marginLeft: 10,
+            marginRight: 10,
+          }}
+        />
+        <Feather
+          name="edit-2"
+          size={20}
+          color="black"
+          style={{
+            marginLeft: 10,
+            marginRight: 10,
+          }}
+        />
+      </View>
+    </View>
+  );
+};
+
+const ChatRoomHeader = (props) => {
+  return (
+    <View
+      style={{
+        width: phoneWidth,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+      }}
+    >
+      <Image
+        source={{
+          uri: "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/1.jpg",
+        }}
+        style={{
+          width: 30,
+          height: 30,
+          borderRadius: 30,
+          marginLeft: 40,
+        }}
+      />
+      <Text
+        style={{
+          fontSize: 18,
+          fontWeight: "bold",
+          // marginLeft: 20,
+        }}
+      >
+        {props.children}
+      </Text>
+      <View
+        style={{
+          flexDirection: "row",
+        }}
+      >
+        <Feather
+          name="camera"
+          size={20}
+          color="black"
+          style={{
+            marginLeft: 10,
+            marginRight: 10,
+          }}
+        />
         <Feather
           name="edit-2"
           size={20}
           color="black"
           style={{
             marginLeft: 20,
+            marginRight: 20,
           }}
         />
       </View>
